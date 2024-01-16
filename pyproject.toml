@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling>=1.3.1", "jupyterlab~=4.0"]
+# requires = ["hatchling>=1.3.1", "jupyterlab~=4.0"]
 build-backend = "hatchling.build"
 
 [project]
@@ -28,32 +28,32 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
 ]
-dependencies = [
-    "jupyter_server>=1.6,<3",
-    "traitlets~=5.0",
-    "nbconvert~=7.0",
-    "pydantic>=1.10,<3",
-    "sqlalchemy~=1.0",
-    "croniter~=1.4",
-    "pytz==2023.3",
-    "fsspec==2023.6.0",
-    "psutil~=5.9"
-]
+# dependencies = [
+#     "jupyter_server>=1.6,<3",
+#     "traitlets~=5.0",
+#     "nbconvert~=7.0",
+#     "pydantic>=1.10,<3",
+#     "sqlalchemy~=1.0",
+#     "croniter~=1.4",
+#     "pytz==2023.3",
+#     "fsspec==2023.6.0",
+#     "psutil~=5.9"
+# ]
 
-[project.optional-dependencies]
-test = [
-    "pytest",
-    "pytest-cov",
-    "jupyter_server[test]>=1.6,<3"
-]
-dev = [
-    "click"
-]
-docs = [
-    "sphinx",
-    "myst_parser",
-    "pydata_sphinx_theme"
-]
+# [project.optional-dependencies]
+# test = [
+#     "pytest",
+#     "pytest-cov",
+#     "jupyter_server[test]>=1.6,<3"
+# ]
+# dev = [
+#     "click"
+# ]
+# docs = [
+#     "sphinx",
+#     "myst_parser",
+#     "pydata_sphinx_theme"
+# ]
 
 [project.urls]
 Homepage = "https://github.com/jupyter-server/jupyter-scheduler"
@@ -73,24 +73,24 @@ artifacts = ["jupyter_scheduler/labextension"]
 [tool.hatch.build.targets.sdist]
 exclude = [".github"]
 
-[tool.hatch.build.hooks.jupyter-builder]
-dependencies = ["hatch-jupyter-builder>=0.5"]
-build-function = "hatch_jupyter_builder.npm_builder"
-ensured-targets = [
-    "jupyter_scheduler/labextension/static/style.js",
-    "jupyter_scheduler//labextension/package.json",
-]
-skip-if-exists = ["jupyter_scheduler/labextension/static/style.js"]
+# [tool.hatch.build.hooks.jupyter-builder]
+# dependencies = ["hatch-jupyter-builder>=0.5"]
+# build-function = "hatch_jupyter_builder.npm_builder"
+# ensured-targets = [
+#     "jupyter_scheduler/labextension/static/style.js",
+#     "jupyter_scheduler//labextension/package.json",
+# ]
+# skip-if-exists = ["jupyter_scheduler/labextension/static/style.js"]
 
-[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
-build_cmd = "build:prod"
-npm = ["jlpm"]
+# [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
+# build_cmd = "build:prod"
+# npm = ["jlpm"]
 
-[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
-build_cmd = "install:extension"
-npm = ["jlpm"]
-source_dir = "src"
-build_dir = "jupyter_scheduler/labextension"
+# [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+# build_cmd = "install:extension"
+# npm = ["jlpm"]
+# source_dir = "src"
+# build_dir = "jupyter_scheduler/labextension"
 
 [tool.tbump.version]
 current = "2.4.0"
