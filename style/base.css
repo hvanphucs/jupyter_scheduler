@@ -1,0 +1,104 @@
+/*
+    See the JupyterLab Developer Guide for useful CSS Patterns:
+
+    https://jupyterlab.readthedocs.io/en/stable/developer/css.html
+*/
+
+@import './collapsible-panel.css';
+@import './variables.css';
+@import './box.css';
+@import './stack.css';
+@import './heading.css';
+@import './cluster.css';
+@import './button.css';
+@import './labeled-value.css';
+@import './edit-job-definitions.css';
+
+.jp-notebook-jobs-panel {
+  background: var(--jp-layout-color1);
+  color: var(--jp-ui-font-color1);
+  font-size: var(--jp-ui-font-size1);
+  overflow-y: auto;
+}
+
+.jp-notebook-jobs-panel a {
+  color: var(--jp-content-link-color);
+}
+
+.jp-notebook-job-list-empty {
+  margin-top: 12px;
+}
+
+/* Error reporting */
+.jp-error-boundary {
+  max-width: 500px;
+  margin: 12px;
+}
+
+.jp-error-boundary h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Create job form */
+
+.jp-create-job-form {
+  max-width: 500px;
+}
+
+.jp-create-job-label {
+  flex: 0 0 18ch;
+}
+
+.jp-create-job-input {
+  flex: 0 1 36ch;
+}
+
+/* Job details widget */
+
+.jp-notebook-job-details {
+  background-color: var(--jp-layout-color2);
+  width: 100%;
+  margin-bottom: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.jp-notebook-job-details.details-hidden {
+  display: none;
+}
+
+.jp-notebook-job-details.details-visible {
+  display: flex;
+}
+
+.jp-notebook-job-details-grid {
+  /* This div both displays in a flex container and is itself a flex container */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.jp-notebook-job-details-row {
+  flex: 1 1 auto;
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.jp-notebook-job-details-key {
+  font-weight: bold;
+  flex: 0 0 40%;
+}
+
+.jp-notebook-job-details-value {
+  flex: 0 0 60%;
+}
+
+.jp-notebook-job-parameter {
+  margin: 0;
+}

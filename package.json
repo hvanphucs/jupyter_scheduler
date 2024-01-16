@@ -1,0 +1,144 @@
+{
+  "name": "@jupyterlab/scheduler",
+  "version": "2.4.0",
+  "description": "A JupyterLab extension for running notebook jobs",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/jupyter-server/jupyter-scheduler",
+  "bugs": {
+    "url": "https://github.com/jupyter-server/jupyter-scheduler/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Project Jupyter"
+  },
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "schema/*.json",
+    "style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "style": "style/index.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jupyter-server/jupyter-scheduler.git"
+  },
+  "scripts": {
+    "build": "jlpm build:lib && jlpm build:labextension:dev",
+    "build:prod": "jlpm clean && jlpm build:lib && jlpm build:labextension",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc",
+    "clean": "jlpm clean:lib",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "clean:lintcache": "rimraf .eslintcache .stylelintcache",
+    "clean:labextension": "rimraf jupyter_scheduler/labextension",
+    "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
+    "dev-install": "pip install -e . && jupyter labextension develop . --overwrite && jupyter server extension enable jupyter_scheduler",
+    "eslint": "jlpm eslint:check --fix",
+    "eslint:check": "eslint . --cache --ext .ts,.tsx",
+    "install:extension": "jlpm build",
+    "lint": "jlpm stylelint && jlpm prettier && jlpm eslint",
+    "lint:check": "jlpm stylelint:check && jlpm prettier:check && jlpm eslint:check",
+    "prettier": "jlpm prettier:base --write --list-different",
+    "prettier:base": "prettier \"**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}\"",
+    "prettier:check": "jlpm prettier:base --check",
+    "stylelint": "jlpm stylelint:check --fix",
+    "stylelint:check": "stylelint --cache \"style/**/*.css\"",
+    "test": "jest --coverage",
+    "watch": "run-p watch:src watch:labextension",
+    "watch:src": "tsc -w",
+    "watch:labextension": "jupyter labextension watch ."
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@jupyterlab/application": "^4",
+    "@jupyterlab/apputils": "^4",
+    "@jupyterlab/coreutils": "^6",
+    "@jupyterlab/filebrowser": "^4",
+    "@jupyterlab/launcher": "^4",
+    "@jupyterlab/services": "^7",
+    "@jupyterlab/translation": "^4",
+    "@jupyterlab/ui-components": "^4",
+    "@lumino/coreutils": "^2",
+    "@lumino/polling": "^2",
+    "@lumino/signaling": "^2",
+    "@lumino/widgets": "^2",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.6",
+    "@mui/system": "^5.10.6",
+    "@types/react-dom": "^18.0.5",
+    "cronstrue": "^2.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tzdata": "^1.0.33"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@jupyterlab/builder": "^4",
+    "@jupyterlab/testutils": "^4",
+    "@types/jest": "^29",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^29",
+    "mkdirp": "^1.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
+    "stylelint": "^14.3.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended": "^6.0.0",
+    "stylelint-config-standard": "~24.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "ts-jest": "^29",
+    "typescript": "~4.3.0"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^18.0.5"
+  },
+  "sideEffects": [
+    "style/*.css",
+    "style/index.js"
+  ],
+  "styleModule": "style/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "jupyterlab": {
+    "discovery": {
+      "server": {
+        "managers": [
+          "pip"
+        ],
+        "base": {
+          "name": "jupyter_scheduler"
+        }
+      }
+    },
+    "extension": true,
+    "outputDir": "jupyter_scheduler/labextension",
+    "schemaDir": "schema"
+  },
+  "jupyter-releaser": {
+    "hooks": {
+      "before-build-npm": [
+        "python -m pip install jupyterlab~=4.0",
+        "jlpm",
+        "jlpm build:prod"
+      ],
+      "before-build-python": [
+        "jlpm clean:all"
+      ]
+    }
+  }
+}
